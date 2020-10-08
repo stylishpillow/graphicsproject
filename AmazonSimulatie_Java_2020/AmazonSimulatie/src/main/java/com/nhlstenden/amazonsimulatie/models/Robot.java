@@ -39,15 +39,19 @@ class Robot implements Object3D, Updatable {
      */
     @Override
     public boolean update() {
-        if(this.name == "robot" && x < 15) {
+        if(this.name == "robot" && x < 15 && z < 15) {
             this.x += 1;
-        } else if (this.name == "robot1" && x < 25) {
-            this.x += 0.5;
         }
-            else {
-            this.z += 0.5;
+        else if(this.name == "robot" && z < 15 && x > 14){
+            this.z += 1;
         }
-        
+        else if(this.name == "robot" && x > 1 && z > 14){
+            this.x -= 1;
+        }
+        else if(this.name == "robot" && x < 15 && z > 1){
+            this.z -= 1;
+        }
+
         return true;
     }
 
