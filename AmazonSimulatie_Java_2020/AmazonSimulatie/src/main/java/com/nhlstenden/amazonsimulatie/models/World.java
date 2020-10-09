@@ -49,7 +49,7 @@ public class World implements Model {
      * te worden.
      */
     @Override
-    public void update() {
+    public void update() throws InterruptedException {
         for (Object3D object : this.worldObjects) {
             if(object instanceof Updatable) {
                 if (((Updatable)object).update()) {

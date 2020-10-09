@@ -42,18 +42,36 @@
                 window.addEventListener('resize', onWindowResize, false);
 
                 var geometry = new THREE.PlaneGeometry(30, 30, 32); // Bepaalt groote van speelveld.
-                var material = new THREE.MeshBasicMaterial({ color: 0x248248000, side: THREE.DoubleSide });
+                var material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/checkered-floor.jpg"), side: THREE.DoubleSide });
                 var plane = new THREE.Mesh(geometry, material);
                 plane.rotation.x = Math.PI / 2.0;
                 plane.position.x = 15;
                 plane.position.z = 15;
                 scene.add(plane);
 
+                var geometry = new THREE.BoxGeometry( 1, 4, 1 );
+                var material = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+                var cube = new THREE.Mesh( geometry, material );
+                cube.rotation.x = Math.PI / 2.0;
+                cube.position.x = 20;
+                cube.position.z = 20;
+                cube.position.y = 0.5;
+                scene.add( cube );
+
+                var geometry1 = new THREE.BoxGeometry( 1, 4, 1 );
+                var material1 = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+                var cube1 = new THREE.Mesh( geometry1, material1 );
+                cube1.rotation.x = Math.PI / 2.0;
+                cube1.position.x = 20;
+                cube1.position.z = 10;
+                cube1.position.y = 0.5;
+                scene.add( cube1 );
+
                 var light = new THREE.AmbientLight(0x404040);
                 light.intensity = 4;
                 scene.add(light);
 
-                var skyGeometry = new THREE.CubeGeometry(100, 100, 100);
+                var skyGeometry = new THREE.CubeGeometry(1000, 1000, 1000);
                 var skyMaterials =
                     [
                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/front.png"), side: THREE.DoubleSide }),
@@ -68,7 +86,7 @@
 
                         new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/left.png"), side: THREE.DoubleSide })
                     ];
-                // var skyMaterial = new THREE.MeshFaceMaterial(skyMaterials);
+
                 var sky = new THREE.Mesh(skyGeometry, skyMaterials);
                 scene.add(sky);
             }

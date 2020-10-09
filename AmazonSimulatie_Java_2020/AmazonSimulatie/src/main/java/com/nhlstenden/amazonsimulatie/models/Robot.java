@@ -1,6 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Deze class stelt een robot voor. Hij impelementeerd de class Object3D, omdat het ook een
@@ -24,6 +27,7 @@ class Robot implements Object3D, Updatable {
         this.uuid = UUID.randomUUID();
     }
 
+
     /*
      * Deze update methode wordt door de World aangeroepen wanneer de
      * World zelf geupdate wordt. Dit betekent dat elk object, ook deze
@@ -38,7 +42,15 @@ class Robot implements Object3D, Updatable {
      * in de view)
      */
     @Override
-    public boolean update() {
+    public boolean update() throws InterruptedException {
+        double xr = Math.random() * (30 - 1 + 1) + 1;
+        double zr = Math.random() * (30 - 1 + 1) + 1;
+        ArrayList<Integer> node = new ArrayList<>(Arrays.asList(10, 15));
+        ArrayList<Integer> node2 = new ArrayList<>(Arrays.asList(30, 1));
+        ArrayList<Integer> nodeEnd = new ArrayList<>(Arrays.asList(0, 0));
+
+
+
         if(this.name == "robot" && x < 15 && z == 0) {
             this.x += 1;
         }
@@ -51,6 +63,24 @@ class Robot implements Object3D, Updatable {
         else if(this.name == "robot" && x == 0 && z > 0){
             this.z -= 1;
         }
+
+        if(this.name == "robot1" ) {
+
+            this.x += node.get(0);
+        }
+        else if(this.name == "robot1" ){
+
+            this.z += node.get(1);
+        }
+         if(this.name == "robot1") {
+
+            this.x = nodeEnd.get(0);
+        }
+        else if(this.name == "robot1" ){
+
+            this.z = nodeEnd.get(1);
+        }
+
 
         return true;
     }
