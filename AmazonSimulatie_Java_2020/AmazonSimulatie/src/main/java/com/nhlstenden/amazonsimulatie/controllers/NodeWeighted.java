@@ -12,7 +12,7 @@ public class NodeWeighted {
     private boolean visited;
     LinkedList<EdgeWeighted> edges;
 
-    NodeWeighted(int n, String name) {
+    public NodeWeighted(int n, String name) {
         this.n = n;
         this.name = name;
         visited = false;

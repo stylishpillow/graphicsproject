@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import com.nhlstenden.amazonsimulatie.controllers.GraphWeighted;
+import com.nhlstenden.amazonsimulatie.controllers.NodeWeighted;
+
 /*
  * Deze class stelt een robot voor. Hij impelementeerd de class Object3D, omdat het ook een
  * 3D object is. Ook implementeerd deze class de interface Updatable. Dit is omdat
@@ -43,6 +46,31 @@ class Robot implements Object3D, Updatable {
      */
     @Override
     public boolean update() throws InterruptedException {
+        GraphWeighted graphWeighted = new GraphWeighted(true);
+        NodeWeighted zero = new NodeWeighted(0, "0");
+        NodeWeighted one = new NodeWeighted(1, "1");
+        NodeWeighted two = new NodeWeighted(2, "2");
+        NodeWeighted three = new NodeWeighted(3, "3");
+        NodeWeighted four = new NodeWeighted(4, "4");
+        //NodeWeighted five = new NodeWeighted(5, "5");
+        //NodeWeighted six = new NodeWeighted(6, "6");
+
+        // Our addEdge method automatically adds Nodes as well.
+        // The addNode method is only there for unconnected Nodes,
+        // if we wish to add any
+        graphWeighted.addEdge(zero, one, 4);
+        graphWeighted.addEdge(one, two, 4);
+        graphWeighted.addEdge(two, three, 4);
+        graphWeighted.addEdge(three, four, 4);
+        //graphWeighted.addEdge(one, two, 7);
+        //graphWeighted.addEdge(two, four, 9);
+        //graphWeighted.addEdge(three, four, 5);
+        //graphWeighted.addEdge(three, five, 2);
+        //graphWeighted.addEdge(four, six, 6);
+        //graphWeighted.addEdge(five, four, 1);
+        //graphWeighted.addEdge(five, six, 8);
+
+        graphWeighted.DijkstraShortestPath(zero, four);
         double xr = Math.random() * (30 - 1 + 1) + 1;
         double zr = Math.random() * (30 - 1 + 1) + 1;
         ArrayList<Integer> node = new ArrayList<>(Arrays.asList(10, 15));
