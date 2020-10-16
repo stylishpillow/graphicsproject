@@ -64,22 +64,17 @@ class Robot implements Object3D, Updatable {
             this.z -= 1;
         }
 
-        if(this.name == "robot1" ) {
+        if(this.name == "robot1" && x < node.get(0)) {
 
-            this.x += node.get(0);
-        }
-        else if(this.name == "robot1" ){
+            this.x += 0.2;
 
-            this.z += node.get(1);
         }
-         if(this.name == "robot1") {
+        else if(this.name == "robot1" && z < node.get(1)) {
 
-            this.x = nodeEnd.get(0);
-        }
-        else if(this.name == "robot1" ){
+            this.z += 0.2;
 
-            this.z = nodeEnd.get(1);
         }
+
 
 
         return true;
