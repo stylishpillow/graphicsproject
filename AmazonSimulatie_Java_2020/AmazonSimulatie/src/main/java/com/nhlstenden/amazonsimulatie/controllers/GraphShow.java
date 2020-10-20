@@ -3,7 +3,7 @@ package com.nhlstenden.amazonsimulatie.controllers;
 import java.util.ArrayList;
 
 public class GraphShow {
-    public static ArrayList<String> graphShow() {
+    public ArrayList<String> graphShow() {
         GraphWeighted graphWeighted = new GraphWeighted(true);
         NodeWeighted zero = new NodeWeighted(0, "0");
         NodeWeighted one = new NodeWeighted(1, "1");

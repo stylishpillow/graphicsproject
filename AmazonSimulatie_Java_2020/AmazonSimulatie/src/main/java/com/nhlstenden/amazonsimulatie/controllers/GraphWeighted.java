@@ -89,7 +89,7 @@ private void addEdgeHelper(NodeWeighted a, NodeWeighted b, double weight) {
     a.edges.add(new EdgeWeighted(a, b, weight));
 }
     
-public ArrayList DijkstraShortestPath(NodeWeighted start, NodeWeighted end) {
+public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted end) {
     // We keep track of which path gives us the shortest path for each node
     // by keeping track how we arrived at a particular node, we effectively
     // keep a "pointer" to the parent node of each node, and we follow that
