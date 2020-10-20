@@ -150,10 +150,11 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 // Since our changedAt map keeps track of child -> parent relations
                 // in order to print the path we need to add the parent before the child and
                 // it's descendants
-                path = parent.name + " " + path;
+                path2.add(parent.name);
+                path2.add(path);
                 child = parent;
             }
-            path2.add(path);
+            //path2.add(path);
             //System.out.println(path);
             //System.out.println("The path costs: " + shortestPathMap.get(end));
             return path2;

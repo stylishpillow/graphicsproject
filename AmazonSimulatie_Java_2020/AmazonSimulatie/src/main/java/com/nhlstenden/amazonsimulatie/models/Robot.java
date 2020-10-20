@@ -1,4 +1,5 @@
 package com.nhlstenden.amazonsimulatie.models;
+import java.util.ArrayList;
 import java.util.UUID;
 import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
 
@@ -18,6 +19,9 @@ class Robot implements Object3D, Updatable{
     private double rotationX = 0;
     private double rotationY = 0;
     private double rotationZ = 0;
+
+    private int start = 0;
+    private int end = 0;
 
     public Robot(String name) {
         this.name = name;
@@ -39,32 +43,32 @@ class Robot implements Object3D, Updatable{
      * in de view)
      */
     @Override
-    public boolean update() throws InterruptedException {
-        GraphShow grapshow = new GraphShow();
+    public boolean update() {
+        GraphShow grapshow = new GraphShow(); 
+        this.start = 0;
+        this.end = 1;  
+        ArrayList<String> finalpath = new ArrayList<>();
+        finalpath = grapshow.graphShow(start, end);
+        //System.out.print(finalpath);
+        //int j = Integer.valueOf(finalpath.get(1));
+        //System.out.print(j);
 
-        //ArrayList<String> path4 = new ArrayList<String>();
-        //path4 = grapshow.graphShow();
-        System.out.print(grapshow.graphShow());
-        //System.out.print(path3); 
-
-       // String current = path3.get(0);
-        //String next = path3.get(1);
-        //worldObjects.add("foets");
-        if(this.name == "robot" && x < 15 && z == 0) {
+        if(this.name == "robot" && Integer.valueOf(finalpath.get(1)) > this.x){
             this.x += 1;
         }
-        else if(this.name == "robot" && z < 15 && x == 15){
-            this.z += 1;
-        }
-        else if(this.name == "robot" && x > 0 && z == 15){
-            this.x -= 1;
-        }
-        else if(this.name == "robot" && x == 0 && z > 0){
-            this.z -= 1;
-        }
 
-
-
+        //if(this.name == "robot" && x < 15 && z == 0) {
+         //this.x += 1;
+        // }
+        //else if(this.name == "robot" && z < 15 && x == 15){
+        //   this.z += 1;
+       // }
+       // else if(this.name == "robot" && x > 0 && z == 15){
+        //    this.x -= 1;
+        //}
+        //else if(this.name == "robot" && x == 0 && z > 0){
+        //    this.z -= 1;
+        //}
         return true;
     }
 
