@@ -22,7 +22,7 @@ public interface Model {
      * Wanneer een class dit implementeerd, is het binnen deze software
      * genoeg om een model te zijn.
      */
-    void update();
+    void update() throws InterruptedException;
     void addObserver(PropertyChangeListener pcl);
     List<Object3D> getWorldObjectsAsList();
 }

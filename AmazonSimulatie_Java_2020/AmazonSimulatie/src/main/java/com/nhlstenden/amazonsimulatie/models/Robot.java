@@ -1,6 +1,13 @@
 package com.nhlstenden.amazonsimulatie.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
+import com.nhlstenden.amazonsimulatie.controllers.GraphWeighted;
+import com.nhlstenden.amazonsimulatie.controllers.NodeWeighted;
 
 /*
  * Deze class stelt een robot voor. Hij impelementeerd de class Object3D, omdat het ook een
@@ -24,6 +31,39 @@ class Robot implements Object3D, Updatable{
         this.uuid = UUID.randomUUID();
     }
 
+    public class Graaf extends GraphWeighted{
+        public Graaf(boolean directed) {
+			super(directed);
+            GraphWeighted graphWeighted = new GraphWeighted(true);
+            NodeWeighted zero = new NodeWeighted(0, "0");
+            NodeWeighted one = new NodeWeighted(1, "1");
+            NodeWeighted two = new NodeWeighted(2, "2");
+            NodeWeighted three = new NodeWeighted(3, "3");
+            NodeWeighted four = new NodeWeighted(4, "4");
+            NodeWeighted five = new NodeWeighted(5, "5");
+            NodeWeighted six = new NodeWeighted(6, "6");
+    
+            // Our addEdge method automatically adds Nodes as well.
+            // The addNode method is only there for unconnected Nodes,
+            // if we wish to add any
+            graphWeighted.addEdge(zero, one, 8);
+            graphWeighted.addEdge(zero, two, 11);
+            graphWeighted.addEdge(one, three, 3);
+            graphWeighted.addEdge(one, four, 8);
+            graphWeighted.addEdge(one, two, 7);
+            graphWeighted.addEdge(two, four, 9);
+            graphWeighted.addEdge(three, four, 5);
+            graphWeighted.addEdge(three, five, 2);
+            graphWeighted.addEdge(four, six, 6);
+            graphWeighted.addEdge(five, four, 1);
+            graphWeighted.addEdge(five, six, 8);
+
+            ArrayList<String> path3 = new ArrayList<String>();
+            path3 = graphWeighted.DijkstraShortestPath(NodeWeighted.zero, six);
+		}
+    }
+
+
     /*
      * Deze update methode wordt door de World aangeroepen wanneer de
      * World zelf geupdate wordt. Dit betekent dat elk object, ook deze
@@ -38,7 +78,17 @@ class Robot implements Object3D, Updatable{
      * in de view)
      */
     @Override
-    public boolean update() {
+    public boolean update() throws InterruptedException {
+        GraphShow grapshow = new GraphShow();
+
+        //ArrayList<String> path4 = new ArrayList<String>();
+        //path4 = grapshow.graphShow();
+        System.out.print(grapshow.graphShow());
+        //System.out.print(path3); 
+
+       // String current = path3.get(0);
+        //String next = path3.get(1);
+        //worldObjects.add("foets");
         if(this.name == "robot" && x < 15 && z == 0) {
             this.x += 1;
         }
@@ -51,6 +101,8 @@ class Robot implements Object3D, Updatable{
         else if(this.name == "robot" && x == 0 && z > 0){
             this.z -= 1;
         }
+
+
 
         return true;
     }
