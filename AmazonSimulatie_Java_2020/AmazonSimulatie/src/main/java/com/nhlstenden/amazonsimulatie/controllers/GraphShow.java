@@ -1,7 +1,9 @@
 package com.nhlstenden.amazonsimulatie.controllers;
 
-public class GrapShow {
-    public static void main(String[] args) {
+import java.util.ArrayList;
+
+public class GraphShow {
+    public static ArrayList<String> graphShow() {
         GraphWeighted graphWeighted = new GraphWeighted(true);
         NodeWeighted zero = new NodeWeighted(0, "0");
         NodeWeighted one = new NodeWeighted(1, "1");
@@ -26,6 +28,8 @@ public class GrapShow {
         graphWeighted.addEdge(five, four, 1);
         graphWeighted.addEdge(five, six, 8);
 
-        graphWeighted.DijkstraShortestPath(zero, six);
+        ArrayList<String> path3 = new ArrayList<String>();
+        path3 = graphWeighted.DijkstraShortestPath(zero, six);
+        return path3;
     }
 }

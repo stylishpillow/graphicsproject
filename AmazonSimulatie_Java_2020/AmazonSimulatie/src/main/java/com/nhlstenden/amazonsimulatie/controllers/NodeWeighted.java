@@ -4,7 +4,8 @@ import java.util.LinkedList;
 
 public class NodeWeighted {
 
-        // The int n and String name are just arbitrary attributes
+        public static NodeWeighted zero;
+	// The int n and String name are just arbitrary attributes
     // we've chosen for our nodes these attributes can of course
     // be whatever you need
     int n;

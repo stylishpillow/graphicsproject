@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
 import com.nhlstenden.amazonsimulatie.controllers.GraphWeighted;
 import com.nhlstenden.amazonsimulatie.controllers.NodeWeighted;
 
@@ -30,6 +31,38 @@ class Robot implements Object3D, Updatable {
         this.uuid = UUID.randomUUID();
     }
 
+    public class Graaf extends GraphWeighted{
+        public Graaf(boolean directed) {
+			super(directed);
+            GraphWeighted graphWeighted = new GraphWeighted(true);
+            NodeWeighted zero = new NodeWeighted(0, "0");
+            NodeWeighted one = new NodeWeighted(1, "1");
+            NodeWeighted two = new NodeWeighted(2, "2");
+            NodeWeighted three = new NodeWeighted(3, "3");
+            NodeWeighted four = new NodeWeighted(4, "4");
+            NodeWeighted five = new NodeWeighted(5, "5");
+            NodeWeighted six = new NodeWeighted(6, "6");
+    
+            // Our addEdge method automatically adds Nodes as well.
+            // The addNode method is only there for unconnected Nodes,
+            // if we wish to add any
+            graphWeighted.addEdge(zero, one, 8);
+            graphWeighted.addEdge(zero, two, 11);
+            graphWeighted.addEdge(one, three, 3);
+            graphWeighted.addEdge(one, four, 8);
+            graphWeighted.addEdge(one, two, 7);
+            graphWeighted.addEdge(two, four, 9);
+            graphWeighted.addEdge(three, four, 5);
+            graphWeighted.addEdge(three, five, 2);
+            graphWeighted.addEdge(four, six, 6);
+            graphWeighted.addEdge(five, four, 1);
+            graphWeighted.addEdge(five, six, 8);
+
+            ArrayList<String> path3 = new ArrayList<String>();
+            path3 = graphWeighted.DijkstraShortestPath(NodeWeighted.zero, six);
+		}
+    }
+
 
     /*
      * Deze update methode wordt door de World aangeroepen wanneer de
@@ -46,39 +79,16 @@ class Robot implements Object3D, Updatable {
      */
     @Override
     public boolean update() throws InterruptedException {
-        GraphWeighted graphWeighted = new GraphWeighted(true);
-        NodeWeighted zero = new NodeWeighted(0, "0");
-        NodeWeighted one = new NodeWeighted(1, "1");
-        NodeWeighted two = new NodeWeighted(2, "2");
-        NodeWeighted three = new NodeWeighted(3, "3");
-        NodeWeighted four = new NodeWeighted(4, "4");
-        //NodeWeighted five = new NodeWeighted(5, "5");
-        //NodeWeighted six = new NodeWeighted(6, "6");
+        GraphShow grapshow = new GraphShow();
 
-        // Our addEdge method automatically adds Nodes as well.
-        // The addNode method is only there for unconnected Nodes,
-        // if we wish to add any
-        graphWeighted.addEdge(zero, one, 4);
-        graphWeighted.addEdge(one, two, 4);
-        graphWeighted.addEdge(two, three, 4);
-        graphWeighted.addEdge(three, four, 4);
-        //graphWeighted.addEdge(one, two, 7);
-        //graphWeighted.addEdge(two, four, 9);
-        //graphWeighted.addEdge(three, four, 5);
-        //graphWeighted.addEdge(three, five, 2);
-        //graphWeighted.addEdge(four, six, 6);
-        //graphWeighted.addEdge(five, four, 1);
-        //graphWeighted.addEdge(five, six, 8);
+        //ArrayList<String> path4 = new ArrayList<String>();
+        //path4 = grapshow.graphShow();
+        System.out.print(grapshow.graphShow());
+        //System.out.print(path3); 
 
-        graphWeighted.DijkstraShortestPath(zero, four);
-        double xr = Math.random() * (30 - 1 + 1) + 1;
-        double zr = Math.random() * (30 - 1 + 1) + 1;
-        ArrayList<Integer> node = new ArrayList<>(Arrays.asList(10, 15));
-        ArrayList<Integer> node2 = new ArrayList<>(Arrays.asList(30, 1));
-        ArrayList<Integer> nodeEnd = new ArrayList<>(Arrays.asList(0, 0));
-
-
-
+       // String current = path3.get(0);
+        //String next = path3.get(1);
+        //worldObjects.add("foets");
         if(this.name == "robot" && x < 15 && z == 0) {
             this.x += 1;
         }
@@ -90,17 +100,6 @@ class Robot implements Object3D, Updatable {
         }
         else if(this.name == "robot" && x == 0 && z > 0){
             this.z -= 1;
-        }
-
-        if(this.name == "robot1" && x < node.get(0)) {
-
-            this.x += 0.2;
-
-        }
-        else if(this.name == "robot1" && z < node.get(1)) {
-
-            this.z += 0.2;
-
         }
 
 
