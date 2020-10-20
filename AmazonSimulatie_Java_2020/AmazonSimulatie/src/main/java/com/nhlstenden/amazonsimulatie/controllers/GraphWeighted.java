@@ -152,7 +152,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 // it's descendants
                 path2.add(parent.co);
                 path2.add(parent.name);
-                path2.add(child.co);
+                path2.add(end.co);
                 path2.add(path);
                 child = parent;
             }

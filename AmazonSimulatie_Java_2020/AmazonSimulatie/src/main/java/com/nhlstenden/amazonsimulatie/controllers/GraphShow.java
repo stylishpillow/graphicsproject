@@ -8,7 +8,7 @@ public class GraphShow {
         GraphWeighted graphWeighted = new GraphWeighted(true);
         NodeWeighted zero = new NodeWeighted(0, "0", "x");
         NodeWeighted one = new NodeWeighted(15, "15", "x");
-        //NodeWeighted two = new NodeWeighted(2, "2");
+        NodeWeighted two = new NodeWeighted(5, "5", "y");
         //NodeWeighted three = new NodeWeighted(3, "3");
         //NodeWeighted four = new NodeWeighted(4, "4");
         //NodeWeighted five = new NodeWeighted(5, "5");
@@ -21,7 +21,9 @@ public class GraphShow {
         // The addNode method is only there for unconnected Nodes,
         // if we wish to add any
         graphWeighted.addEdge(zero, one, 8);
-        //graphWeighted.addEdge(zero, two, 11);
+        graphWeighted.addEdge(zero, two, 12);
+        graphWeighted.addEdge(one, two, 6);
+        //graphWeighted.addEdge(one, two, 11);
        // graphWeighted.addEdge(one, three, 3);
         //graphWeighted.addEdge(one, four, 8);
         //graphWeighted.addEdge(one, two, 7);
@@ -39,8 +41,8 @@ public class GraphShow {
         }
 
         switch (end){
-            case 1:
-            ends = one;
+            case 2:
+            ends = two;
             break;
         }
 

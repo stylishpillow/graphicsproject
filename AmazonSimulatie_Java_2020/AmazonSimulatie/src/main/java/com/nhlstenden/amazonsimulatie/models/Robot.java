@@ -46,10 +46,10 @@ class Robot implements Object3D, Updatable{
     public boolean update() {
         GraphShow grapshow = new GraphShow(); 
         this.start = 0;
-        this.end = 1;  
+        this.end = 2;  
         ArrayList<String> finalpath = new ArrayList<>();
         finalpath = grapshow.graphShow(start, end);
-        //System.out.print(finalpath);
+        System.out.print(finalpath);
         //int j = Integer.valueOf(finalpath.get(1));
         //System.out.print(j);
 
