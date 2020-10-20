@@ -12,7 +12,7 @@ public class GraphWeighted {
     private Set<NodeWeighted> nodes;
     private boolean directed;
 
-    public GraphWeighted(boolean directed) {
+    GraphWeighted(boolean directed) {
         this.directed = directed;
         nodes = new HashSet<>();
     }
@@ -131,8 +131,8 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
 
         // If the closest non-visited node is our destination, we want to print the path
         if (currentNode == end) {
-            //System.out.println("The path with the smallest weight between "
-                                   //+ start.name + " and " + end.name + " is:");
+            System.out.println("The path with the smallest weight between "
+                                   + start.name + " and " + end.name + " is:");
 
             NodeWeighted child = end;
 
@@ -140,7 +140,9 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             // repeatedly adding to the beginning of the string
             // defeats the purpose of using StringBuilder
             String path = end.name;
+            String endpath = "";
             ArrayList<String> path2 = new ArrayList<String>();
+            ArrayList<String> path3 = new ArrayList<String>();
             while (true) {
                 NodeWeighted parent = changedAt.get(child);
                 if (parent == null) {
@@ -150,16 +152,20 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 // Since our changedAt map keeps track of child -> parent relations
                 // in order to print the path we need to add the parent before the child and
                 // it's descendants
-                path2.add(parent.co);
-                path2.add(parent.name);
-                path2.add(end.co);
+                path = parent.name + "," + parent.co +  "," + path;
                 path2.add(path);
+                //path2.add(parent.co);
+                //path2.add(parent.name);
+               // path2.add(end.co);
+               // path2.add(end.name);
                 child = parent;
             }
+            endpath = path2.get(path2.size() - 1) + "," + end.co;
+            path3.add(endpath);
             //path2.add(path);
-            //System.out.println(path);
-            //System.out.println("The path costs: " + shortestPathMap.get(end));
-            return path2;
+            System.out.println(path);
+            System.out.println("The path costs: " + shortestPathMap.get(end));
+            return path3;
         }
         currentNode.visit();
 

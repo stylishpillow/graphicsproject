@@ -9,8 +9,8 @@ public class GraphShow {
         NodeWeighted zero = new NodeWeighted(0, "0", "x");
         NodeWeighted one = new NodeWeighted(15, "15", "x");
         NodeWeighted two = new NodeWeighted(5, "5", "y");
-        //NodeWeighted three = new NodeWeighted(3, "3");
-        //NodeWeighted four = new NodeWeighted(4, "4");
+        NodeWeighted three = new NodeWeighted(3, "3", "x");
+        NodeWeighted four = new NodeWeighted(4, "4", "y");
         //NodeWeighted five = new NodeWeighted(5, "5");
         //NodeWeighted six = new NodeWeighted(6, "6");
         NodeWeighted starts = new NodeWeighted(0, "0", "");
@@ -21,18 +21,9 @@ public class GraphShow {
         // The addNode method is only there for unconnected Nodes,
         // if we wish to add any
         graphWeighted.addEdge(zero, one, 8);
-        graphWeighted.addEdge(zero, two, 12);
-        graphWeighted.addEdge(one, two, 6);
-        //graphWeighted.addEdge(one, two, 11);
-       // graphWeighted.addEdge(one, three, 3);
-        //graphWeighted.addEdge(one, four, 8);
-        //graphWeighted.addEdge(one, two, 7);
-        //graphWeighted.addEdge(two, four, 9);
-       // graphWeighted.addEdge(three, four, 5);
-       // graphWeighted.addEdge(three, five, 2);
-       // graphWeighted.addEdge(four, six, 6);
-        //graphWeighted.addEdge(five, four, 1);
-        //graphWeighted.addEdge(five, six, 8);
+        graphWeighted.addEdge(one, two, 8);
+        graphWeighted.addEdge(two, three, 8);
+        graphWeighted.addEdge(three, four, 8);
 
         switch (start){
             case 0:
@@ -41,10 +32,11 @@ public class GraphShow {
         }
 
         switch (end){
-            case 2:
-            ends = two;
+            case 4:
+            ends = four;
             break;
         }
+        //graphWeighted.DijkstraShortestPath(starts, ends);
 
         ArrayList<String> path3 = new ArrayList<String>();
         path3 = graphWeighted.DijkstraShortestPath(starts, ends);
