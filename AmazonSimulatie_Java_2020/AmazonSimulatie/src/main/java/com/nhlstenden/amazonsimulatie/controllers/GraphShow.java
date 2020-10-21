@@ -8,9 +8,9 @@ public class GraphShow {
         GraphWeighted graphWeighted = new GraphWeighted(true);
         NodeWeighted zero = new NodeWeighted(0, "0", "x");
         NodeWeighted one = new NodeWeighted(15, "15", "x");
-        NodeWeighted two = new NodeWeighted(5, "5", "y");
-        NodeWeighted three = new NodeWeighted(3, "3", "x");
-        NodeWeighted four = new NodeWeighted(4, "4", "y");
+        NodeWeighted two = new NodeWeighted(50, "50", "y");
+        NodeWeighted three = new NodeWeighted(30, "30", "x");
+        NodeWeighted four = new NodeWeighted(41, "41", "y");
         //NodeWeighted five = new NodeWeighted(5, "5");
         //NodeWeighted six = new NodeWeighted(6, "6");
         NodeWeighted starts = new NodeWeighted(0, "0", "");

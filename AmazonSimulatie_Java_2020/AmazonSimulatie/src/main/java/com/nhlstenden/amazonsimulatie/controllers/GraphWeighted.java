@@ -131,8 +131,8 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
 
         // If the closest non-visited node is our destination, we want to print the path
         if (currentNode == end) {
-            System.out.println("The path with the smallest weight between "
-                                   + start.name + " and " + end.name + " is:");
+           // System.out.println("The path with the smallest weight between "
+                                   //+ start.name + " and " + end.name + " is:");
 
             NodeWeighted child = end;
 
@@ -140,9 +140,9 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             // repeatedly adding to the beginning of the string
             // defeats the purpose of using StringBuilder
             String path = end.name;
-            String endpath = "";
+            //int count = 0;
+            //String endpath = "";
             ArrayList<String> path2 = new ArrayList<String>();
-            ArrayList<String> path3 = new ArrayList<String>();
             while (true) {
                 NodeWeighted parent = changedAt.get(child);
                 if (parent == null) {
@@ -152,20 +152,57 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 // Since our changedAt map keeps track of child -> parent relations
                 // in order to print the path we need to add the parent before the child and
                 // it's descendants
-                path = parent.name + "," + parent.co +  "," + path;
-                path2.add(path);
+                path = parent.name + parent.co + "," + path;
+                //count++;
+                //path2.add(path);
+                //path2.add(child.name);
                 //path2.add(parent.co);
                 //path2.add(parent.name);
                // path2.add(end.co);
                // path2.add(end.name);
                 child = parent;
             }
-            endpath = path2.get(path2.size() - 1) + "," + end.co;
-            path3.add(endpath);
+            path += end.co;
+            for (int i = 0; i <= path.length() - 2; i++){ 
+            Character check1 = path.charAt(i);
+            Character check2 = path.charAt(i + 1);
+            Character check3 = path.charAt(i + 2);
+            if (check1 != ',' && check2 != ',' && check3 != ','){
+                String pathi = String.valueOf(path.charAt(i));   
+                String pathis = String.valueOf(path.charAt(i+1));  
+                String pathisp = String.valueOf(path.charAt(i+2));
+                
+                path2.add(pathi + pathis + pathisp);
+                i += 3;
+                
+            } 
+            else if (check1 != ',' && check2 != ',' && check3 == ','){
+                String pathi = String.valueOf(path.charAt(i));   
+                String pathis = String.valueOf(path.charAt(i+1));
+
+                path2.add(pathi + pathis);
+                i += 2;
+            }
+            else if (check1 != ',' && check2 == null && check3 == null){
+                String pathi = String.valueOf(path.charAt(i));
+                path2.add(pathi);
+                i++;
+            }
+            else if (i == path.length() - 2 && path.charAt(i) == ',' ) {
+                String pathie = String.valueOf(path.charAt(i + 1));
+                path2.add(pathie + end.co);
+            }                       
+            else {
+                continue;
+            }
+
+            }
+            //endpath = path2.get(path2.size() - 1) + "," + end.co;
+            //path3.add(endpath);
             //path2.add(path);
-            System.out.println(path);
-            System.out.println("The path costs: " + shortestPathMap.get(end));
-            return path3;
+             //System.out.println(path);
+            //System.out.println("The path costs: " + shortestPathMap.get(end));
+            return path2;
         }
         currentNode.visit();
 

@@ -53,7 +53,7 @@ class Robot implements Object3D, Updatable{
         //int j = Integer.valueOf(finalpath.get(1));
         //System.out.print(j);
 
-       // if(this.name == "robot" && finalpath.get(2) == "x" && Integer.valueOf(finalpath.get(3)) > this.x){
+      // if(this.name == "robot" && finalpath.get(3) == "x" && Integer.valueOf(finalpath.get(2)) > this.x){
             //this.x += 1;
        // }
 
