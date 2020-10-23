@@ -10,14 +10,12 @@ public class NodeWeighted {
     // be whatever you need
     int n;
     String name;
-    String co;
     private boolean visited;
     LinkedList<EdgeWeighted> edges;
 
-    public NodeWeighted(int n, String name, String co) {
+    public NodeWeighted(int n, String name) {
         this.n = n;
         this.name = name;
-        this.co = co;
         visited = false;
         edges = new LinkedList<>();
     }

@@ -1,10 +1,13 @@
 package com.nhlstenden.amazonsimulatie.models;
+
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.function.Consumer;
 
 import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
+import com.nhlstenden.amazonsimulatie.controllers.GraphWeighted;
 
 /*
  * Deze class stelt een robot voor. Hij impelementeerd de class Object3D, omdat het ook een
@@ -25,6 +28,9 @@ class Robot implements Object3D, Updatable{
 
     private int start = 0;
     private int end = 0;
+    private int current = 0;
+    private int next = 0;
+    private int length = 0;
 
     public Robot(String name) {
         this.name = name;
@@ -55,7 +61,19 @@ class Robot implements Object3D, Updatable{
         this.end = 4;
         ArrayList<String> finalpath = new ArrayList<>();
         finalpath = grapshow.graphShow(start, end);
-//        System.out.print(finalpath);
+
+        length = finalpath.size();
+
+        for (int i = 0; i < length - 1; i++){    
+            this.current = Integer.parseInt(finalpath.get(i));
+            this.next = Integer.parseInt(finalpath.get(i+1));
+
+            GraphWeighted graphWeighted = new GraphWeighted(true);
+            Double coordinaten = graphWeighted.GetCoordinaten(current, next);
+            System.out.print(coordinaten);
+        }
+        // graphWeighted.GetCoordinaten(, next)
+        //System.out.print(finalpath)
         //int j = Integer.valueOf(finalpath.get(1));
         //System.out.print(j);
 
@@ -64,23 +82,23 @@ class Robot implements Object3D, Updatable{
 //
 //        }
 
-        for (String path : finalpath){
-            if(path.contains("x") == true){
-                this.x += 1;
-                System.out.print("x is true");
-            }
-            else if(path.contains("y") == true){
-                this.z += 1;
-                System.out.print("y is true");
-            }
-            else{
-                this.x += 0;
-                this.z += 0;
-                System.out.print("niks is true");
-            }
+        //for (String path : finalpath){
+          //  if(path.contains("x") == true){
+            //    this.x += 1;
+              //  System.out.print("x is true");
+            //}
+            //else if(path.contains("y") == true){
+              //  this.z += 1;
+                //System.out.print("y is true");
+            //}
+            //else{
+              //  this.x += 0;
+                //this.z += 0;
+                //System.out.print("niks is true");
+            //}
 
 
-        }
+        //}
 
 //        ArrayList<String> names = new ArrayList<>(Arrays.asList("A","B","C","D"));
 

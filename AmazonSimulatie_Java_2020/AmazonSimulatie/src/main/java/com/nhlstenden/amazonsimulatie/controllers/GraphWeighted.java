@@ -12,9 +12,26 @@ public class GraphWeighted {
     private Set<NodeWeighted> nodes;
     private boolean directed;
 
-    GraphWeighted(boolean directed) {
+    public GraphWeighted(boolean directed) {
         this.directed = directed;
         nodes = new HashSet<>();
+    }
+
+    public double GetCoordinaten(int current, int next){
+
+        NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
+        NodeWeighted nexti = new NodeWeighted(next, String.valueOf(next));
+
+        for (NodeWeighted node : nodes) {
+            LinkedList<EdgeWeighted> edges = node.edges;
+            if (node == currenti){
+                return 4.4;
+            }
+           for (EdgeWeighted edge : edges){
+
+           }
+        }
+        return 1.1;
     }
 
     // Doesn't need to be called for any node that has an edge to another node
@@ -25,7 +42,7 @@ public void addNode(NodeWeighted... n) {
     nodes.addAll(Arrays.asList(n));
 }
 
-public void addEdge(NodeWeighted source, NodeWeighted destination, double weight) {
+public void addEdge(NodeWeighted source, NodeWeighted destination, double weight, Character co) {
     // Since we're using a Set, it will only add the nodes
     // if they don't already exist in our graph
     nodes.add(source);
@@ -141,6 +158,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             // defeats the purpose of using StringBuilder
             String path = end.name;
             //int count = 0;
+            System.out.print(nodes);
             //String endpath = "";
             ArrayList<String> path2 = new ArrayList<String>();
             while (true) {
@@ -152,7 +170,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 // Since our changedAt map keeps track of child -> parent relations
                 // in order to print the path we need to add the parent before the child and
                 // it's descendants
-                path = parent.name + parent.co + "," + path;
+                path = parent.name + "," + path;
                 //count++;
                 //path2.add(path);
                 //path2.add(child.name);
@@ -162,40 +180,15 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                // path2.add(end.name);
                 child = parent;
             }
-            path += end.co;
-            for (int i = 0; i <= path.length() - 2; i++){ 
+            for (int i = 0; i <= path.length() - 1; i++){ 
             Character check1 = path.charAt(i);
-            Character check2 = path.charAt(i + 1);
-            Character check3 = path.charAt(i + 2);
-            if (check1 != ',' && check2 != ',' && check3 != ','){
-                String pathi = String.valueOf(path.charAt(i));   
-                String pathis = String.valueOf(path.charAt(i+1));  
-                String pathisp = String.valueOf(path.charAt(i+2));
-                
-                path2.add(pathi + pathis + pathisp);
-                i += 3;
-                
+            if (check1 != ','){
+                String pathi = String.valueOf(path.charAt(i));                  
+                path2.add(pathi);              
             } 
-            else if (check1 != ',' && check2 != ',' && check3 == ','){
-                String pathi = String.valueOf(path.charAt(i));   
-                String pathis = String.valueOf(path.charAt(i+1));
-
-                path2.add(pathi + pathis);
-                i += 2;
-            }
-            else if (check1 != ',' && check2 == null && check3 == null){
-                String pathi = String.valueOf(path.charAt(i));
-                path2.add(pathi);
-                i++;
-            }
-            else if (i == path.length() - 2 && path.charAt(i) == ',' ) {
-                String pathie = String.valueOf(path.charAt(i + 1));
-                path2.add(pathie + end.co);
-            }                       
-            else {
+            else if (check1 == ','){
                 continue;
-            }
-
+             }
             }
             //endpath = path2.get(path2.size() - 1) + "," + end.co;
             //path3.add(endpath);
