@@ -17,22 +17,22 @@ public class GraphWeighted {
         nodes = new HashSet<>();
     }
 
-    public double GetCoordinaten(int current, int next){
+    public double GetCoordinaten(int current){
 
+        //NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
         NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
-        NodeWeighted nexti = new NodeWeighted(next, String.valueOf(next));
 
         for (NodeWeighted node : nodes) {
             LinkedList<EdgeWeighted> edges = node.edges;
-            if (node == currenti){
-                return 4.4;
+            if (node.n == currenti.n){
+             for (EdgeWeighted edge : edges) {
+                return edge.weight;
             }
-           for (EdgeWeighted edge : edges){
-
-           }
-        }
-        return 1.1;
+      }
     }
+      return 0.0;
+    }
+    
 
     // Doesn't need to be called for any node that has an edge to another node
 // since addEdge makes sure that both nodes are in the nodes Set
@@ -111,6 +111,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
     // by keeping track how we arrived at a particular node, we effectively
     // keep a "pointer" to the parent node of each node, and we follow that
     // path to the start
+
     HashMap<NodeWeighted, NodeWeighted> changedAt = new HashMap<>();
     changedAt.put(start, null);
 
@@ -120,8 +121,8 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
     // Setting every node's shortest path weight to positive infinity to start
     // except the starting node, whose shortest path weight is 0
     for (NodeWeighted node : nodes) {
-        if (node == start)
-            shortestPathMap.put(start, 0.0);
+        if (node == start){
+            shortestPathMap.put(start, 0.0); }
         else shortestPathMap.put(node, Double.POSITIVE_INFINITY);
     }
 

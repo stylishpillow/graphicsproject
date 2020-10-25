@@ -28,7 +28,6 @@ class Robot implements Object3D, Updatable{
 
     private int start = 0;
     private int end = 0;
-    private int current = 0;
     private int next = 0;
     private int length = 0;
 
@@ -59,19 +58,15 @@ class Robot implements Object3D, Updatable{
         GraphShow grapshow = new GraphShow(); 
         this.start = 0;
         this.end = 4;
-        ArrayList<String> finalpath = new ArrayList<>();
-        finalpath = grapshow.graphShow(start, end);
+        //ArrayList<String> finalpath = new ArrayList<>();
+        //finalpath = grapshow.graphShow(start, end);
 
-        length = finalpath.size();
+        ArrayList<Double> coordinate = new ArrayList<>();
+        coordinate = grapshow.graphShow(start, end);
 
-        for (int i = 0; i < length - 1; i++){    
-            this.current = Integer.parseInt(finalpath.get(i));
-            this.next = Integer.parseInt(finalpath.get(i+1));
+        System.out.println(coordinate);
 
-            GraphWeighted graphWeighted = new GraphWeighted(true);
-            Double coordinaten = graphWeighted.GetCoordinaten(current, next);
-            System.out.print(coordinaten);
-        }
+
         // graphWeighted.GetCoordinaten(, next)
         //System.out.print(finalpath)
         //int j = Integer.valueOf(finalpath.get(1));
@@ -103,7 +98,7 @@ class Robot implements Object3D, Updatable{
 //        ArrayList<String> names = new ArrayList<>(Arrays.asList("A","B","C","D"));
 
         //1
-        finalpath.forEach(name -> name.contains("x"));
+        //finalpath.forEach(name -> name.contains("x"));
 
 
 
