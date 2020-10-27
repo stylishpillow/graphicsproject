@@ -141,7 +141,7 @@
                         }
 
                         if (command.parameters.type == "truck") {
-                            var geometry = new THREE.BoxGeometry(10, 5, 10);
+                            var geometry = new THREE.BoxGeometry(5, 5, 10);
                             var cubeMaterials = [
                                 new THREE.MeshBasicMaterial({
                                     map: new THREE.TextureLoader().load("textures/robot_side.png"),
@@ -171,8 +171,9 @@
                             var material = new THREE.MeshFaceMaterial(cubeMaterials);
                             var truck = new THREE.Mesh(geometry, material);
 
-                            truck.position.x = 20;
-                            truck.position.y = 0.15;
+                            truck.position.x = -2.5;
+                            truck.position.z = 0;
+                            truck.position.y = 1;
 
 
 
@@ -197,10 +198,6 @@
                     object.rotation.y = command.parameters.rotationY;
                     object.rotation.z = command.parameters.rotationZ;
                 }
-//TODO truck object correct toevoegen aan scene, misschien tussen bestaande code zetten of een nieuw event aanmaken.
-
-                // scene.add(group);
-                // worldObjects[command.parameters.uuid] = group;
             }
 
             init();

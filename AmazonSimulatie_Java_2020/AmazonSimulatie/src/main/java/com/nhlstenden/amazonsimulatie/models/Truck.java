@@ -1,8 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
+import java.sql.Time;
 import java.util.UUID;
 
-class Truck implements Object3D, Updatable{
+class Truck implements Object3D, Updatable {
     private UUID uuid;
 
     private String name;
@@ -13,11 +14,12 @@ class Truck implements Object3D, Updatable{
     private double rotationX = 0;
     private double rotationY = 0;
     private double rotationZ = 0;
-
+    boolean left = true;
 
     public Truck(String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
+        this.z = 50;
     }
 
     @Override
@@ -62,10 +64,25 @@ class Truck implements Object3D, Updatable{
 
     @Override
     public boolean update()  {
-        if(this.name == "truck") {
-//           this.x += 1;
-            }
+        boolean start = true;
+        double end = 10;
+        double leave = 1000;
+        double f = 0.1;
+
+
+
+
+        if(start) {
+            this.z = this.z + f * (end - this.z);
+            return false;
+        }
+        else {
+            this.z = this.z + f * (leave - this.z);
+        }
+
+
 
         return true;
     }
+
 }

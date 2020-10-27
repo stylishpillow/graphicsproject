@@ -55,41 +55,41 @@ class Robot implements Object3D, Updatable{
 
     @Override
     public boolean update() {
-        if (Vrachtwagen){
-        GraphShow grapshow = new GraphShow(); 
-        this.start = 0;
-        this.end = 4;
-        //ArrayList<String> finalpath = new ArrayList<>();
-        //finalpath = grapshow.graphShow(start, end);
-
-        ArrayList<String> coordinates = new ArrayList<>();
-        coordinates = grapshow.graphShow(start, end);
-        length = coordinates.size();
-        //System.out.println(coordinates);
-        //this.x = 0;
-        //this.i = 0;
-        String c = coordinates.get(i);
-        double p = Double.valueOf(coordinates.get(i+1));
-        if(this.name == "robot" && x < p) {
-         this.x += 1;
-         }
-         else if (this.name == "robot" && c == "y" && y < p) {
-            this.y += 1;
-            } 
-            else {
-                i += 2;
-            }
-        //else if(this.name == "robot" && z < 15 && x == 15){
-        //   this.z += 1;
-       // }
-       // else if(this.name == "robot" && x > 0 && z == 15){
-        //    this.x -= 1;
-        //}
-        //else if(this.name == "robot" && x == 0 && z > 0){
-        //    this.z -= 1;
-        //}
-        return true;
-    }
+//        if (Vrachtwagen){
+//        GraphShow grapshow = new GraphShow();
+//        this.start = 0;
+//        this.end = 4;
+//        //ArrayList<String> finalpath = new ArrayList<>();
+//        //finalpath = grapshow.graphShow(start, end);
+//
+//        ArrayList<String> coordinates = new ArrayList<>();
+//        coordinates = grapshow.graphShow(start, end);
+//        length = coordinates.size();
+//        //System.out.println(coordinates);
+//        //this.x = 0;
+//        //this.i = 0;
+//        String c = coordinates.get(i);
+//        double p = Double.valueOf(coordinates.get(i+1));
+//        if(this.name == "robot" && x < p) {
+//         this.x += 1;
+//         }
+//         else if (this.name == "robot" && c == "y" && y < p) {
+//            this.y += 1;
+//            }
+//            else {
+//                i += 2;
+//            }
+//        //else if(this.name == "robot" && z < 15 && x == 15){
+//        //   this.z += 1;
+//       // }
+//       // else if(this.name == "robot" && x > 0 && z == 15){
+//        //    this.x -= 1;
+//        //}
+//        //else if(this.name == "robot" && x == 0 && z > 0){
+//        //    this.z -= 1;
+//        //}
+////        return true;
+//    }
     return true;
 }
 
