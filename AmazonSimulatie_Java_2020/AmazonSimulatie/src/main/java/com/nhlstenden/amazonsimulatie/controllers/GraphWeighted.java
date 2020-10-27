@@ -17,23 +17,41 @@ public class GraphWeighted {
         nodes = new HashSet<>();
     }
 
-    public double GetCoordinaten(int current){
+    public double GetCoordinaten(int current, int next){
 
         //NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
         NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
+        NodeWeighted nexti = new NodeWeighted(next, String.valueOf(next));
 
         for (NodeWeighted node : nodes) {
             LinkedList<EdgeWeighted> edges = node.edges;
             if (node.n == currenti.n){
              for (EdgeWeighted edge : edges) {
-                return edge.weight;
+                 if (edge.destination.n == nexti.n){
+                 return edge.weight;
+                 }
             }
       }
     }
       return 0.0;
     }
     
+    public Character GetCharacter(int current, int next){
+        NodeWeighted currenti = new NodeWeighted(current, String.valueOf(current));
+        NodeWeighted nexti = new NodeWeighted(next, String.valueOf(next));
 
+        for (NodeWeighted node : nodes) {
+            LinkedList<EdgeWeighted> edges = node.edges;
+            if (node.n == currenti.n){
+             for (EdgeWeighted edge : edges) {
+                if (edge.destination.n == nexti.n){
+                    return edge.coordinate;
+                    }
+                }      
+      }
+    }
+      return null;
+    }
     // Doesn't need to be called for any node that has an edge to another node
 // since addEdge makes sure that both nodes are in the nodes Set
 public void addNode(NodeWeighted... n) {
@@ -49,10 +67,10 @@ public void addEdge(NodeWeighted source, NodeWeighted destination, double weight
     nodes.add(destination);
 
     // We're using addEdgeHelper to make sure we don't have duplicate edges
-    addEdgeHelper(source, destination, weight);
+    addEdgeHelper(source, destination, weight, co);
 
     if (!directed && source != destination) {
-        addEdgeHelper(destination, source, weight);
+        addEdgeHelper(destination, source, weight, co);
     }
 }
 
@@ -91,19 +109,20 @@ public void resetNodesVisited() {
         node.unvisit();
     }
 }
-private void addEdgeHelper(NodeWeighted a, NodeWeighted b, double weight) {
+private void addEdgeHelper(NodeWeighted a, NodeWeighted b, double weight, Character c) {
     // Go through all the edges and see whether that edge has
     // already been added
     for (EdgeWeighted edge : a.edges) {
         if (edge.source == a && edge.destination == b) {
             // Update the value in case it's a different one now
             edge.weight = weight;
+            edge.coordinate = c;
             return;
         }
     }
     // If it hasn't been added already (we haven't returned
     // from the for loop), add the edge
-    a.edges.add(new EdgeWeighted(a, b, weight));
+    a.edges.add(new EdgeWeighted(a, b, weight, c));
 }
     
 public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted end) {
@@ -159,7 +178,6 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             // defeats the purpose of using StringBuilder
             String path = end.name;
             //int count = 0;
-            System.out.print(nodes);
             //String endpath = "";
             ArrayList<String> path2 = new ArrayList<String>();
             while (true) {
@@ -183,14 +201,33 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             }
             for (int i = 0; i <= path.length() - 1; i++){ 
             Character check1 = path.charAt(i);
-            if (check1 != ','){
-                String pathi = String.valueOf(path.charAt(i));                  
-                path2.add(pathi);              
+            if (i != 7){
+            Character check2 = path.charAt(i+1);
+            if (check1 != ',' && check2 != ','){
+                String pathi = String.valueOf(path.charAt(i));  
+                String pathis = String.valueOf(path.charAt(i+1));                 
+                path2.add(pathi + pathis);  
+                i ++;            
             } 
+            else if (check1 != ',' && check2 == ','){
+                String pathi = String.valueOf(path.charAt(i));
+                path2.add(pathi);
+            }
             else if (check1 == ','){
                 continue;
-             }
             }
+        }
+        else if (check1 != ',') {
+            String pathi = String.valueOf(path.charAt(i));
+            String pathis = String.valueOf(path.charAt(i+1)); 
+            path2.add(pathi + pathis);
+        }
+        else if (check1 == ','){
+            String pathi = String.valueOf(path.charAt(i+1)); 
+            path2.add(pathi);
+            break;
+        }
+     }
             //endpath = path2.get(path2.size() - 1) + "," + end.co;
             //path3.add(endpath);
             //path2.add(path);

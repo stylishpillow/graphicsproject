@@ -2,12 +2,10 @@ package com.nhlstenden.amazonsimulatie.models;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 import java.util.function.Consumer;
 
 import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
-import com.nhlstenden.amazonsimulatie.controllers.GraphWeighted;
 
 /*
  * Deze class stelt een robot voor. Hij impelementeerd de class Object3D, omdat het ook een
@@ -28,8 +26,10 @@ class Robot implements Object3D, Updatable{
 
     private int start = 0;
     private int end = 0;
-    private int next = 0;
     private int length = 0;
+    private int i = 0;
+
+    private boolean Vrachtwagen = true;
 
     public Robot(String name) {
         this.name = name;
@@ -55,60 +55,30 @@ class Robot implements Object3D, Updatable{
 
     @Override
     public boolean update() {
+        if (Vrachtwagen){
         GraphShow grapshow = new GraphShow(); 
         this.start = 0;
         this.end = 4;
         //ArrayList<String> finalpath = new ArrayList<>();
         //finalpath = grapshow.graphShow(start, end);
 
-        ArrayList<Double> coordinate = new ArrayList<>();
-        coordinate = grapshow.graphShow(start, end);
-
-        System.out.println(coordinate);
-
-
-        // graphWeighted.GetCoordinaten(, next)
-        //System.out.print(finalpath)
-        //int j = Integer.valueOf(finalpath.get(1));
-        //System.out.print(j);
-
-//        if(this.name == "robot"){
-//            finalpath.forEach(path -> name.contains("x"));
-//
-//        }
-
-        //for (String path : finalpath){
-          //  if(path.contains("x") == true){
-            //    this.x += 1;
-              //  System.out.print("x is true");
-            //}
-            //else if(path.contains("y") == true){
-              //  this.z += 1;
-                //System.out.print("y is true");
-            //}
-            //else{
-              //  this.x += 0;
-                //this.z += 0;
-                //System.out.print("niks is true");
-            //}
-
-
-        //}
-
-//        ArrayList<String> names = new ArrayList<>(Arrays.asList("A","B","C","D"));
-
-        //1
-        //finalpath.forEach(name -> name.contains("x"));
-
-
-
-      // if(this.name == "robot" && finalpath.get(3) == "x" && Integer.valueOf(finalpath.get(2)) > this.x){
-            //this.x += 1;
-       // }
-
-        //if(this.name == "robot" && x < 15 && z == 0) {
-         //this.x += 1;
-        // }
+        ArrayList<String> coordinates = new ArrayList<>();
+        coordinates = grapshow.graphShow(start, end);
+        length = coordinates.size();
+        //System.out.println(coordinates);
+        //this.x = 0;
+        //this.i = 0;
+        String c = coordinates.get(i);
+        double p = Double.valueOf(coordinates.get(i+1));
+        if(this.name == "robot" && x < p) {
+         this.x += 1;
+         }
+         else if (this.name == "robot" && c == "y" && y < p) {
+            this.y += 1;
+            } 
+            else {
+                i += 2;
+            }
         //else if(this.name == "robot" && z < 15 && x == 15){
         //   this.z += 1;
        // }
@@ -120,6 +90,8 @@ class Robot implements Object3D, Updatable{
         //}
         return true;
     }
+    return true;
+}
 
     @Override
     public String getUUID() {
