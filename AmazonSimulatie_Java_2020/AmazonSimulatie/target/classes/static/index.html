@@ -137,46 +137,36 @@
                             //robot1.position.x = 5;
                            // robot1.position.y = 0.15;
 
-                            var group = new THREE.Group();
-                            group.add(robot);
 
-
-                            scene.add(group);
-                            worldObjects[command.parameters.uuid] = group;
                         }
-                    }
 
-                    /*
-                     * Deze code wordt elke update uitgevoerd. Het update alle positiegegevens van het 3D object.
-                     */
-                    var object = worldObjects[command.parameters.uuid];
-
-                    object.position.x = command.parameters.x;
-                    object.position.y = command.parameters.y;
-                    object.position.z = command.parameters.z;
-
-                    object.rotation.x = command.parameters.rotationX;
-                    object.rotation.y = command.parameters.rotationY;
-                    object.rotation.z = command.parameters.rotationZ;
-                }
-
-                var command = parseCommand(event.data);
-
-                //Wanneer het commando is "object_update", dan wordt deze code uitgevoerd. Bekijk ook de servercode om dit goed te begrijpen.
-                if (command.command == "object_update") {
-                    //Wanneer het object dat moet worden geupdate nog niet bestaat (komt niet voor in de lijst met worldObjects op de client),
-                    //dan wordt het 3D model eerst aangemaakt in de 3D wereld.
-                    if (Object.keys(worldObjects).indexOf(command.parameters.uuid) < 0) {
-                        //Wanneer het object een robot is, wordt de code hieronder uitgevoerd.
                         if (command.parameters.type == "truck") {
-                            var geometry = new THREE.BoxGeometry(20, 20, 20);
+                            var geometry = new THREE.BoxGeometry(10, 5, 10);
                             var cubeMaterials = [
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //LEFT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_side.png"), side: THREE.DoubleSide }), //RIGHT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_top.png"), side: THREE.DoubleSide }), //TOP
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_bottom.png"), side: THREE.DoubleSide }), //BOTTOM
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //FRONT
-                                new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load("textures/robot_front.png"), side: THREE.DoubleSide }), //BACK
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_side.png"),
+                                    side: THREE.DoubleSide
+                                }), //LEFT
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_side.png"),
+                                    side: THREE.DoubleSide
+                                }), //RIGHT
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_top.png"),
+                                    side: THREE.DoubleSide
+                                }), //TOP
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_bottom.png"),
+                                    side: THREE.DoubleSide
+                                }), //BOTTOM
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_front.png"),
+                                    side: THREE.DoubleSide
+                                }), //FRONT
+                                new THREE.MeshBasicMaterial({
+                                    map: new THREE.TextureLoader().load("textures/robot_front.png"),
+                                    side: THREE.DoubleSide
+                                }), //BACK
                             ];
                             var material = new THREE.MeshFaceMaterial(cubeMaterials);
                             var truck = new THREE.Mesh(geometry, material);
@@ -185,13 +175,13 @@
                             truck.position.y = 0.15;
 
 
-                            var Tgroup = new THREE.Group();
-                            Tgroup.add(truck);
 
 
-                            scene.add(Tgroup);
-                            worldObjects[command.parameters.uuid] = Tgroup;
                         }
+                        var group = new THREE.Group();
+                        group.add(robot, truck);
+                        scene.add(group);
+                        worldObjects[command.parameters.uuid] = group;
                     }
 
                     /*
@@ -207,6 +197,7 @@
                     object.rotation.y = command.parameters.rotationY;
                     object.rotation.z = command.parameters.rotationZ;
                 }
+//TODO truck object correct toevoegen aan scene, misschien tussen bestaande code zetten of een nieuw event aanmaken.
 
                 // scene.add(group);
                 // worldObjects[command.parameters.uuid] = group;

@@ -63,7 +63,7 @@ class Truck implements Object3D, Updatable{
     @Override
     public boolean update()  {
         if(this.name == "truck") {
-           this.x += 1;
+//           this.x += 1;
             }
 
         return true;
