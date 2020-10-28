@@ -24,11 +24,11 @@ public class GraphShow {
         // Our addEdge method automatically adds Nodes as well.
         // The addNode method is only there for unconnected Nodes,
         // if we wish to add any
-        graphWeighted.addEdge(zero, one, 8, 'x');
-        graphWeighted.addEdge(one, two, 9, 'x');
-        graphWeighted.addEdge(one, three, 19, 'x');
-        graphWeighted.addEdge(two, three, 10, 'z');
-        graphWeighted.addEdge(three, four,11, 'x');
+        graphWeighted.addEdge(zero, one, 1, 'x');
+        graphWeighted.addEdge(one, two, 900, 'x');
+        graphWeighted.addEdge(one, three, 40, 'x');
+        graphWeighted.addEdge(two, three, 1000, 'z');
+        graphWeighted.addEdge(three, four,35, 'x');
 
         switch (start){
             case 0:
@@ -69,6 +69,7 @@ public class GraphShow {
             co.add(String.valueOf(chars));
             co.add(String.valueOf(coordinaten));
         }
+        //co.add(get(pat))
         return co;
     }
 }

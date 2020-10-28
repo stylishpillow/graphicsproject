@@ -57,31 +57,48 @@ class Robot implements Object3D, Updatable{
 
     @Override
     public boolean update()  {
-        if (!Vrachtwagen){ 
         this.start = 0;
         this.end = 4;
         coordinates = grapshow.graphShow(start, end);
         length = coordinates.size();
 
         Double f = 0.1;
-        //String x = "x";
-        //System.out.println(coordinates);
-        //this.x = 0;
-        //this.i = 0;
-        if (this.x < 38){
-        for (int i = 0; i < length - 1; i+=2) {
-            String c = coordinates.get(i);
-            double p = Double.valueOf(coordinates.get(i+1));
+        String c = coordinates.get(i);
+        double p = Double.valueOf(coordinates.get(i+1));
+
             if(this.name == "robot" && c.equals("x")) {
-                this.x = this.x + f * (p - this.x);
-                System.out.print(" " + this.x);;         
+                if (i == 0){
+                    this.x = this.x + f * (p - this.x);
+                    System.out.print(" " + this.x);
+                }
+                if (i > 1){
+                double bp = Double.valueOf(coordinates.get(i-1));
+                if (p < bp){
+                    p = p + bp;
+                    this.x = this.x + f * (p - this.x);
+                    System.out.print(" " + this.x);
+                } 
+                if (this.x >= p - 0.1 && i < 3){
+                    i+=2;
+                }
+                else {
+                    this.x = this.x + f * (p - this.x);
+                    System.out.print(" " + this.x);
+                }
+            }          
+            if (this.x >= p - 0.1 && i < 3){
+                i+=2;
             }
-            else if (this.name == "robot1" && c.equals("z")){
+            }
+            else if (this.name == "robot" && c.equals("z")){
                 this.z = this.z + f * (p - this.z);
                 System.out.print(" " + this.z);;   
             }
-        }
-    }
+            else if (this.name == "robot1"){
+                this.x = 0;
+            }
+            
+            String fiets = "fiets";
         //else if(this.name == "robot" && z < 15 && x == 15){
         //   this.z += 1;
        // }
@@ -91,8 +108,7 @@ class Robot implements Object3D, Updatable{
         //else if(this.name == "robot" && x == 0 && z > 0){
         //    this.z -= 1;
         //}
-        return true;
-    }
+    //}
     return true;
 }
 
