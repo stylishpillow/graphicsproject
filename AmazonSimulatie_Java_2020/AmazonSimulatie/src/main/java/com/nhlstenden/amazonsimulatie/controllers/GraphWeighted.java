@@ -11,7 +11,6 @@ public class GraphWeighted {
 
     private Set<NodeWeighted> nodes;
     private boolean directed;
-    private double re = 0;
 
     public GraphWeighted(boolean directed) {
         this.directed = directed;
@@ -29,7 +28,6 @@ public class GraphWeighted {
             if (node.n == currenti.n){
              for (EdgeWeighted edge : edges) {
                  if (edge.destination.n == nexti.n){
-                    re = edge.weight;
                  return edge.weight;
                  }
             }
