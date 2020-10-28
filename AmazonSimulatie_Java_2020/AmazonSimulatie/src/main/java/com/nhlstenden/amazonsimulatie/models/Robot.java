@@ -17,6 +17,7 @@ class Robot implements Object3D, Updatable{
 
     private String name;
     private double x = 0;
+    private double xs = 0;
     private double y = 0;
     private double z = 0;
 
@@ -29,7 +30,10 @@ class Robot implements Object3D, Updatable{
     private int length = 0;
     private int i = 0;
 
-    private boolean Vrachtwagen = true;
+    private boolean Vrachtwagen;
+
+    GraphShow grapshow = new GraphShow(); 
+    ArrayList<String> coordinates = new ArrayList<>();
 
     public Robot(String name) {
         this.name = name;
@@ -51,34 +55,33 @@ class Robot implements Object3D, Updatable{
      * in de view)
      */
 
-
-
     @Override
-    public boolean update() {
-        if (Vrachtwagen){
-        GraphShow grapshow = new GraphShow(); 
+    public boolean update()  {
+        if (!Vrachtwagen){ 
         this.start = 0;
         this.end = 4;
-        //ArrayList<String> finalpath = new ArrayList<>();
-        //finalpath = grapshow.graphShow(start, end);
-
-        ArrayList<String> coordinates = new ArrayList<>();
         coordinates = grapshow.graphShow(start, end);
         length = coordinates.size();
+
+        Double f = 0.1;
+        //String x = "x";
         //System.out.println(coordinates);
         //this.x = 0;
         //this.i = 0;
-        String c = coordinates.get(i);
-        double p = Double.valueOf(coordinates.get(i+1));
-        if(this.name == "robot" && x < p) {
-         this.x += 1;
-         }
-         else if (this.name == "robot" && c == "y" && y < p) {
-            this.y += 1;
-            } 
-            else {
-                i += 2;
+        if (this.x < 38){
+        for (int i = 0; i < length - 1; i+=2) {
+            String c = coordinates.get(i);
+            double p = Double.valueOf(coordinates.get(i+1));
+            if(this.name == "robot" && c.equals("x")) {
+                this.x = this.x + f * (p - this.x);
+                System.out.print(" " + this.x);;         
             }
+            else if (this.name == "robot1" && c.equals("z")){
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);;   
+            }
+        }
+    }
         //else if(this.name == "robot" && z < 15 && x == 15){
         //   this.z += 1;
        // }

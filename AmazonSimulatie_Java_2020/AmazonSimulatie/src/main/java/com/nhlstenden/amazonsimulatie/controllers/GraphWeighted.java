@@ -11,6 +11,7 @@ public class GraphWeighted {
 
     private Set<NodeWeighted> nodes;
     private boolean directed;
+    private double re = 0;
 
     public GraphWeighted(boolean directed) {
         this.directed = directed;
@@ -28,6 +29,7 @@ public class GraphWeighted {
             if (node.n == currenti.n){
              for (EdgeWeighted edge : edges) {
                  if (edge.destination.n == nexti.n){
+                    re = edge.weight;
                  return edge.weight;
                  }
             }
@@ -233,6 +235,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             //path2.add(path);
              //System.out.println(path);
             //System.out.println("The path costs: " + shortestPathMap.get(end));
+            //path2.add(String.valueOf(shortestPathMap.get(end)));
             return path2;
         }
         currentNode.visit();
