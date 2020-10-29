@@ -69,21 +69,21 @@ class Robot implements Object3D, Updatable{
             if(this.name == "robot" && c.equals("x")) {
                 if (i == 0){
                     this.x = this.x + f * (p - this.x);
-                    System.out.print(" " + this.x);
+//                    System.out.print(" " + this.x);
                 }
                 if (i > 1){
                 double bp = Double.valueOf(coordinates.get(i-1));
                 if (p < bp){
                     p = p + bp;
                     this.x = this.x + f * (p - this.x);
-                    System.out.print(" " + this.x);
+//                    System.out.print(" " + this.x);
                 } 
                 if (this.x >= p - 0.1 && i < 3){
                     i+=2;
                 }
                 else {
                     this.x = this.x + f * (p - this.x);
-                    System.out.print(" " + this.x);
+//                    System.out.print(" " + this.x);
                 }
             }          
             if (this.x >= p - 0.1 && i < 3){
@@ -92,7 +92,7 @@ class Robot implements Object3D, Updatable{
             }
             else if (this.name == "robot" && c.equals("z")){
                 this.z = this.z + f * (p - this.z);
-                System.out.print(" " + this.z);;   
+//                System.out.print(" " + this.z);
             }
             else if (this.name == "robot1"){
                 this.x = 0;
