@@ -17,7 +17,6 @@ class Robot implements Object3D, Updatable{
 
     private String name;
     private double x = 0;
-    private double xs = 0;
     private double y = 0;
     private double z = 0;
 
@@ -29,6 +28,7 @@ class Robot implements Object3D, Updatable{
     private int end = 0;
     private int length = 0;
     private int i = 0;
+    private int t = 0;
 
     private boolean Vrachtwagen;
 
@@ -57,48 +57,211 @@ class Robot implements Object3D, Updatable{
 
     @Override
     public boolean update()  {
-        this.start = 0;
-        this.end = 4;
-        coordinates = grapshow.graphShow(start, end);
-        length = coordinates.size();
-
-        Double f = 0.1;
-        String c = coordinates.get(i);
-        double p = Double.valueOf(coordinates.get(i+1));
-
-            if(this.name == "robot" && c.equals("x")) {
+            if(this.name == "robot") {
+                this.start = 0;
+                this.end = 7;
+                this.coordinates = grapshow.graphShow(start, end);
+                this.length = coordinates.size();
+        
+                Double f = 0.9;
+                String c = coordinates.get(i);
+                double p = Double.valueOf(coordinates.get(i+1));
+                if (this.x + this.z != Double.valueOf(coordinates.get(length - 1))){ 
+                if (c.equals("x")){
                 if (i == 0){
                     this.x = this.x + f * (p - this.x);
                     System.out.print(" " + this.x);
+                    if (this.x == p && i < length - 3){
+                        this.i+=2;
+                        c = coordinates.get(i);
+                    }
                 }
-                if (i > 1){
+                if (i > 1 && c.equals("x")){
                 double bp = Double.valueOf(coordinates.get(i-1));
                 if (p < bp){
                     p = p + bp;
                     this.x = this.x + f * (p - this.x);
-                    System.out.print(" " + this.x);
-                } 
-                if (this.x >= p - 0.1 && i < 3){
-                    i+=2;
+                   System.out.print(" " + this.x);
+                   if (this.x == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
                 }
-                else {
+            }
+                if (p == bp && c.equals("x")){
+                    this.t += 1;
+                    if (t > 1 && i > 2){
+                        double bpt = Double.valueOf(coordinates.get(i-3));
+                        p = p + bp + bpt;
+                        this.x = this.x + f * (p - this.x);
+                        System.out.print(" " + this.x);
+                    }
+                    p = p + bp;
                     this.x = this.x + f * (p - this.x);
                     System.out.print(" " + this.x);
+                    if (this.x == p && i < length - 3){
+                        this.i+=2;
+                        c = coordinates.get(i);
+                    }
+                 }
+                else if (c.equals("x")) {
+                 this.x = this.x + f * (p - this.x);
+                System.out.print(" " + this.x);
                 }
             }          
-            if (this.x >= p - 0.1 && i < 3){
-                i+=2;
-            }
-            }
-            else if (this.name == "robot" && c.equals("z")){
+          }
+          else if (c.equals("z")){
+            this.t = 0;
+            if (i == 0){
                 this.z = this.z + f * (p - this.z);
-                System.out.print(" " + this.z);;   
+                System.out.print(" " + this.z);
+                if (this.z == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
+                }
             }
-            else if (this.name == "robot1"){
-                this.x = 0;
+            if (i > 1 && c.equals("z")){
+            double bp = Double.valueOf(coordinates.get(i-1));
+            if (p < bp){
+                p = p + bp;
+                this.z = this.z + f * (p - this.z);
+               System.out.print(" " + this.x);
+               if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
             }
+        }
+        if (p == bp && c.equals("z")){
+            this.t += 1;
+            if (t > 1 && i > 2){
+                double bpt = Double.valueOf(coordinates.get(i-3));
+                p = p + bp + bpt;
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+            }
+            p = p + bp;
+            this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
+            }
+         }
+            else if (c.equals("z")){
+             this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            }
+         }
+         if (this.z == p && i < length - 3){
+            this.i+=2;
+            c = coordinates.get(i);
+        }
+    }
+ }
+}
+        else if (this.name == "robot1"){
+            this.start = 0;
+            this.end = 10;
+            this.coordinates = grapshow.graphShow(start, end);
+            this.length = coordinates.size();
+    
+            Double f = 0.9;
+            String c = coordinates.get(i);
+            double p = Double.valueOf(coordinates.get(i+1));
+            if (this.x + this.z != Double.valueOf(coordinates.get(length - 1))){ 
+            if (c.equals("x")){
+                if (i == 0){
+                    this.x = this.x + f * (p - this.x);
+                    System.out.print(" " + this.x);
+                    if (this.x == p && i < length - 3){
+                        this.i+=2;
+                        c = coordinates.get(i);
+                    }
+                }
+                if (i > 1 && c.equals("x")){
+                double bp = Double.valueOf(coordinates.get(i-1));
+                if (p < bp){
+                    p = p + bp;
+                    this.x = this.x + f * (p - this.x);
+                   System.out.print(" " + this.x);
+                   if (this.x == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
+                }
+            }
+                if (p == bp && c.equals("x")){
+                    this.t += 1;
+                    if (t > 1 && i > 2){
+                        double bpt = Double.valueOf(coordinates.get(i-3));
+                        p = p + bp + bpt;
+                        this.x = this.x + f * (p - this.x);
+                        System.out.print(" " + this.x);
+                    }
+                    p = p + bp;
+                    this.x = this.x + f * (p - this.x);
+                    System.out.print(" " + this.x);
+                    if (this.x == p && i < length - 3){
+                        this.i+=2;
+                        c = coordinates.get(i);
+                    }
+                 }
+                else if (c.equals("x")) {
+                 this.x = this.x + f * (p - this.x);
+                System.out.print(" " + this.x);
+                }
+            }          
+          }
+          if (c.equals("z")){
+            if (i == 0){
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+                if (this.z == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
+                }
+            }
+            if (i > 1 && c.equals("z")){
+            double bp = Double.valueOf(coordinates.get(i-1));
+            if (p < bp){
+                p = p + bp;
+                this.z = this.z + f * (p - this.z);
+               System.out.print(" " + this.x);
+               if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
+            }
+        }
+        if (p == bp && c.equals("z")){
+            this.t += 1;
+            if (t > 1 && i > 2){
+                double bpt = Double.valueOf(coordinates.get(i-3));
+                p = p + bp + bpt;
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+            }
+            if (t < 2){
+            p = p + bp;
+            this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            }
+            if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
+            }
+         }
+            else if (c.equals("z")){
+             this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            }
+         }
+         if (this.z == p && i < length - 3){
+            this.i+=2;
+            c = coordinates.get(i);
+        }
+    }
+ } 
+}
+
             
-            String fiets = "fiets";
         //else if(this.name == "robot" && z < 15 && x == 15){
         //   this.z += 1;
        // }
