@@ -1,9 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
-import java.nio.file.Path;
+
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.function.Consumer;
+
 
 import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
 
@@ -98,17 +98,7 @@ class Robot implements Object3D, Updatable{
                 this.x = 0;
             }
             
-            String fiets = "fiets";
-        //else if(this.name == "robot" && z < 15 && x == 15){
-        //   this.z += 1;
-       // }
-       // else if(this.name == "robot" && x > 0 && z == 15){
-        //    this.x -= 1;
-        //}
-        //else if(this.name == "robot" && x == 0 && z > 0){
-        //    this.z -= 1;
-        //}
-    //}
+
     return true;
 }
 

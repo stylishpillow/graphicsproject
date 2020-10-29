@@ -36,9 +36,11 @@ public class World implements Model {
         Robot robot = new Robot("robot");
         Robot robot1 = new Robot("robot1");
         Truck truck = new Truck("truck");
+        Scaffolding scaffolding = new Scaffolding("scaffolding");
         this.worldObjects.add(robot);
         this.worldObjects.add(robot1);
         this.worldObjects.add(truck);
+        this.worldObjects.add(scaffolding);
     }
 
     /*

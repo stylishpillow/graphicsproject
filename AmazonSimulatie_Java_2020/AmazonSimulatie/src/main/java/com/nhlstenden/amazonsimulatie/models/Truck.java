@@ -19,6 +19,7 @@ class Truck implements Object3D, Updatable {
     boolean s = false;
     boolean t = true;
     int j = 0;
+    Robot robot = new Robot("robot");
   
     private int i = 0;
 
@@ -27,6 +28,7 @@ class Truck implements Object3D, Updatable {
         this.uuid = UUID.randomUUID();
         this.z = 50;
     }
+
 
     @Override
     public String getUUID() {
@@ -82,6 +84,7 @@ class Truck implements Object3D, Updatable {
         double f = 0.1;
 
 
+
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(0, end);
         list.add(1, begin);
@@ -110,7 +113,7 @@ class Truck implements Object3D, Updatable {
                 }
                 if(j != 200)
                 j+=1;
-                System.out.print("timer: " + j);
+
             }
         }
 
