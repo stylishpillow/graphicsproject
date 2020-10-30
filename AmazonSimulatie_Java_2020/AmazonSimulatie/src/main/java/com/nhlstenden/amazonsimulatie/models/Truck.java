@@ -1,9 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
+
 
 class Truck implements Object3D, Updatable {
     private UUID uuid;
@@ -19,7 +19,7 @@ class Truck implements Object3D, Updatable {
     boolean s = false;
     boolean t = true;
     int j = 0;
-    Robot robot = new Robot("robot");
+
   
     private int i = 0;
 
@@ -56,6 +56,16 @@ class Truck implements Object3D, Updatable {
     }
 
     @Override
+    public double setZ(double z) {
+        return 0;
+    }
+
+//    @Override
+//    public double setZ() {
+//        return 0;
+//    }
+
+    @Override
     public double getRotationX() {
         return this.rotationX;
     }
@@ -85,11 +95,14 @@ class Truck implements Object3D, Updatable {
 
 
 
+
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(0, end);
         list.add(1, begin);
 
         double p = list.get(i);
+        Scaffolding.z = lerp(this.z, p, f);
+
 
 
         if(start) {

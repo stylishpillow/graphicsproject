@@ -6,20 +6,29 @@ import java.util.UUID;
 
 public class Scaffolding implements Object3D, Updatable {
 
+
+
     private UUID uuid;
 
     private String name;
     private double x = 0;
     private double y = 0;
-    private double z = 0;
+    public static double z;
 
     private double rotationX = 0;
     private double rotationY = 0;
     private double rotationZ = 0;
 
+//    Scaffolding scaffolding = new Scaffolding("scaffolding");
+
     public Scaffolding(String name){
         this.name = name;
         this.uuid = UUID.randomUUID();
+
+
+    }
+    public static double lerp(double a, double b, double f) {
+        return a + f * (b - a);
     }
     @Override
     public String getUUID() {
@@ -36,6 +45,10 @@ public class Scaffolding implements Object3D, Updatable {
         return this.x;
     }
 
+//    public void setZ(double z){
+//        this.z = z;
+//    }
+
     @Override
     public double getY() {
         return this.y;
@@ -45,6 +58,12 @@ public class Scaffolding implements Object3D, Updatable {
     public double getZ() {
         return this.z;
     }
+
+    @Override
+    public double setZ(double z) {
+        return this.z = getZ();
+    }
+
 
     @Override
     public double getRotationX() {
@@ -63,6 +82,7 @@ public class Scaffolding implements Object3D, Updatable {
 
     @Override
     public boolean update() throws InterruptedException {
+        this.z = z;
         return true;
     }
 }

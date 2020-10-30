@@ -134,6 +134,11 @@ class Robot implements Object3D, Updatable{
     }
 
     @Override
+    public double setZ(double z) {
+        return 0;
+    }
+
+    @Override
     public double getRotationX() {
         return this.rotationX;
     }

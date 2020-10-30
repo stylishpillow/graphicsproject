@@ -48,6 +48,11 @@ public class ProxyObject3D implements Object3D {
     }
 
     @Override
+    public double setZ(double z) {
+        return 0;
+    }
+
+    @Override
     public double getRotationX() {
         return this.object.getRotationX();
     }

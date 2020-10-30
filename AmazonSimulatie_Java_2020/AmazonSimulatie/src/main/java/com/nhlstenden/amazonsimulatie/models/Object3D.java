@@ -14,6 +14,7 @@ public interface Object3D {
     public abstract double getX();
     public abstract double getY();
     public abstract double getZ();
+    public abstract double setZ(double z);
     
     public abstract double getRotationX();
     public abstract double getRotationY();
