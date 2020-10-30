@@ -1,7 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 class Truck implements Object3D, Updatable {
     private UUID uuid;
@@ -14,7 +16,11 @@ class Truck implements Object3D, Updatable {
     private double rotationX = 0;
     private double rotationY = 0;
     private double rotationZ = 0;
-    boolean left = true;
+    boolean s = false;
+    boolean t = true;
+    int j = 0;
+  
+    private int i = 0;
 
     public Truck(String name) {
         this.name = name;
@@ -62,27 +68,56 @@ class Truck implements Object3D, Updatable {
         return this.rotationZ;
     }
 
+    public static double lerp(double a, double b, double f) {
+        return a + f * (b - a);
+    }
+
+
     @Override
-    public boolean update()  {
-        boolean start = true;
-        double end = 10;
-        double leave = 1000;
+    public boolean update() throws InterruptedException {
+
+        boolean start = s ^ t;
+        int end = 10;
+        int begin = 50;
         double f = 0.1;
 
 
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(0, end);
+        list.add(1, begin);
+
+        double p = list.get(i);
 
 
         if(start) {
-            this.z = this.z + f * (end - this.z);
-            return false;
-        }
-        else {
-            this.z = this.z + f * (leave - this.z);
-        }
+            if (this.name == "truck") {
 
+                if (i == 0) {
+                    this.z = lerp(this.z, p, f);
+
+                }
+                if (i == 1 && j == 200) {
+                    this.z = lerp(this.z, p, f);
+                    if(this.z == p - 0.1){
+                        s = true;
+                    }
+
+                }
+                if (i == 0) {
+                    if (this.z <= p + 0.1) {
+                        i += 1;
+                    }
+                }
+                if(j != 200)
+                j+=1;
+                System.out.print("timer: " + j);
+            }
+        }
 
 
         return true;
     }
-
 }
+
+
+
