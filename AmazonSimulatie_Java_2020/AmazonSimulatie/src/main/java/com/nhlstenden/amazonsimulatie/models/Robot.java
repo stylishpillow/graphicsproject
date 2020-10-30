@@ -1,9 +1,9 @@
 package com.nhlstenden.amazonsimulatie.models;
 
-
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.UUID;
-
+import java.util.function.Consumer;
 
 import com.nhlstenden.amazonsimulatie.controllers.GraphShow;
 
@@ -17,7 +17,6 @@ class Robot implements Object3D, Updatable{
 
     private String name;
     private double x = 0;
-    private double xs = 0;
     private double y = 0;
     private double z = 0;
 
@@ -29,6 +28,7 @@ class Robot implements Object3D, Updatable{
     private int end = 0;
     private int length = 0;
     private int i = 0;
+    private int t = 0;
 
     private boolean Vrachtwagen;
 
@@ -57,21 +57,22 @@ class Robot implements Object3D, Updatable{
 
     @Override
     public boolean update()  {
-        this.start = 0;
-        this.end = 4;
-        coordinates = grapshow.graphShow(start, end);
-        length = coordinates.size();
-
-        Double f = 0.1;
-        String c = coordinates.get(i);
-        double p = Double.valueOf(coordinates.get(i+1));
-
-            if(this.name == "robot" && c.equals("x")) {
+            if(this.name == "robot") {
+                this.start = 0;
+                this.end = 7;
+                this.coordinates = grapshow.graphShow(start, end);
+                this.length = coordinates.size();
+        
+                Double f = 0.9;
+                String c = coordinates.get(i);
+                double p = Double.valueOf(coordinates.get(i+1));
+                if (this.x + this.z != Double.valueOf(coordinates.get(length - 1))){ 
+                if (c.equals("x")){
                 if (i == 0){
                     this.x = this.x + f * (p - this.x);
 //                    System.out.print(" " + this.x);
                 }
-                if (i > 1){
+                if (i > 1 && c.equals("x")){
                 double bp = Double.valueOf(coordinates.get(i-1));
                 if (p < bp){
                     p = p + bp;
@@ -81,24 +82,130 @@ class Robot implements Object3D, Updatable{
                 if (this.x >= p - 0.1 && i < 3){
                     i+=2;
                 }
-                else {
+            }          
+          }
+          else if (c.equals("z")){
+            this.t = 0;
+            if (i == 0){
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+                if (this.z == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
+                }
+            }
+            if (i > 1 && c.equals("z")){
+            double bp = Double.valueOf(coordinates.get(i-1));
+            if (p < bp){
+                p = p + bp;
+                this.z = this.z + f * (p - this.z);
+               System.out.print(" " + this.x);
+               if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
+            }
+        }
+        if (p == bp && c.equals("z")){
+            this.t += 1;
+            if (t > 1 && i > 2){
+                double bpt = Double.valueOf(coordinates.get(i-3));
+                p = p + bp + bpt;
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+            }
+            p = p + bp;
+            this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
+            }
+         }
+            else if (c.equals("z")){
+             this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            }
+         }
+         if (this.z == p && i < length - 3){
+            this.i+=2;
+            c = coordinates.get(i);
+        }
+    }
+ }
+}
+        else if (this.name == "robot1"){
+            this.start = 0;
+            this.end = 10;
+            this.coordinates = grapshow.graphShow(start, end);
+            this.length = coordinates.size();
+    
+            Double f = 0.9;
+            String c = coordinates.get(i);
+            double p = Double.valueOf(coordinates.get(i+1));
+            if (this.x + this.z != Double.valueOf(coordinates.get(length - 1))){ 
+            if (c.equals("x")){
+                if (i == 0){
                     this.x = this.x + f * (p - this.x);
 //                    System.out.print(" " + this.x);
                 }
             }          
-            if (this.x >= p - 0.1 && i < 3){
-                i+=2;
+          }
+          if (c.equals("z")){
+            if (i == 0){
+                this.z = this.z + f * (p - this.z);
+                System.out.print(" " + this.z);
+                if (this.z == p && i < length - 3){
+                    this.i+=2;
+                    c = coordinates.get(i);
+                }
             }
+            if (i > 1 && c.equals("z")){
+            double bp = Double.valueOf(coordinates.get(i-1));
+            if (p < bp){
+                p = p + bp;
+                this.z = this.z + f * (p - this.z);
+               System.out.print(" " + this.x);
+               if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
             }
-            else if (this.name == "robot" && c.equals("z")){
+        }
+        if (p == bp && c.equals("z")){
+            this.t += 1;
+            if (t > 1 && i > 2){
+                double bpt = Double.valueOf(coordinates.get(i-3));
+                p = p + bp + bpt;
                 this.z = this.z + f * (p - this.z);
 //                System.out.print(" " + this.z);
             }
-            else if (this.name == "robot1"){
-                this.x = 0;
+            if (this.z == p && i < length - 3){
+                this.i+=2;
+                c = coordinates.get(i);
             }
-            
+         }
+            else if (c.equals("z")){
+             this.z = this.z + f * (p - this.z);
+            System.out.print(" " + this.z);
+            }
+         }
+         if (this.z == p && i < length - 3){
+            this.i+=2;
+            c = coordinates.get(i);
+        }
+    }
+ } 
 
+            
+        //else if(this.name == "robot" && z < 15 && x == 15){
+        //   this.z += 1;
+       // }
+       // else if(this.name == "robot" && x > 0 && z == 15){
+        //    this.x -= 1;
+        //}
+        //else if(this.name == "robot" && x == 0 && z > 0){
+        //    this.z -= 1;
+        //}
+    //}
     return true;
 }
 
@@ -131,11 +238,6 @@ class Robot implements Object3D, Updatable{
     @Override
     public double getZ() {
         return this.z;
-    }
-
-    @Override
-    public double setZ(double z) {
-        return 0;
     }
 
     @Override

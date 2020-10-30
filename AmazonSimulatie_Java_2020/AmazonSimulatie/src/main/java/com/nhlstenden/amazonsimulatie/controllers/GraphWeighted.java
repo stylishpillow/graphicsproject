@@ -201,7 +201,8 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             }
             for (int i = 0; i <= path.length() - 1; i++){ 
             Character check1 = path.charAt(i);
-            if (i != 7){
+
+            if (i <= path.length() - 2){
             Character check2 = path.charAt(i+1);
             if (check1 != ',' && check2 != ','){
                 String pathi = String.valueOf(path.charAt(i));  
@@ -213,19 +214,20 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
                 String pathi = String.valueOf(path.charAt(i));
                 path2.add(pathi);
             }
+            else if (i == path.length() - 2 && check1 != ',' && check2 != ','){
+                String pathi = String.valueOf(path.charAt(i+1));  
+                String pathis = String.valueOf(path.charAt(i+2));                 
+                path2.add(pathi + pathis); 
+                break;
+            }
+            else if (i == path.length() - 2 && check1 == ',' && check2 != ','){ 
+                String pathi = String.valueOf(path.charAt(i+1));              
+                path2.add(pathi); 
+                break;
+            }
             else if (check1 == ','){
                 continue;
             }
-        }
-        else if (check1 != ',') {
-            String pathi = String.valueOf(path.charAt(i));
-            String pathis = String.valueOf(path.charAt(i+1)); 
-            path2.add(pathi + pathis);
-        }
-        else if (check1 == ','){
-            String pathi = String.valueOf(path.charAt(i+1)); 
-            path2.add(pathi);
-            break;
         }
      }
             //endpath = path2.get(path2.size() - 1) + "," + end.co;
@@ -233,7 +235,7 @@ public ArrayList<String> DijkstraShortestPath(NodeWeighted start, NodeWeighted e
             //path2.add(path);
              //System.out.println(path);
             //System.out.println("The path costs: " + shortestPathMap.get(end));
-            //path2.add(String.valueOf(shortestPathMap.get(end)));
+            path2.add(String.valueOf(shortestPathMap.get(end)));
             return path2;
         }
         currentNode.visit();
