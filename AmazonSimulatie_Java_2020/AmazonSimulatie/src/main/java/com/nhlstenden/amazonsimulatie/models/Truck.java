@@ -101,7 +101,8 @@ class Truck implements Object3D, Updatable {
         list.add(1, begin);
 
         double p = list.get(i);
-        Scaffolding.z = lerp(this.z, p, f);
+
+            Scaffolding.z = lerp(Scaffolding.z, p, f);
 
 
 
